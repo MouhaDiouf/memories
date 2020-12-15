@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import useStyles from './styles';
 import { useDispatch } from 'react-redux';
-import { createPost } from '../../actions/posts';
+import { createPost, updatePost } from '../../actions/posts';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import FileBase from 'react-file-base64';
 
-function Form() {
+function Form({ currentId, setCurrentId }) {
   const classes = useStyles();
   const [postData, setPostData] = useState({
     creator: '',
@@ -24,8 +24,12 @@ function Form() {
   };
   const handleSumbit = (e) => {
     e.preventDefault();
-    console.log('postData is ', postData);
-    dispatch(createPost(postData));
+
+    if (currentId) {
+      dispatch(updatePost(currentId, postData));
+    } else {
+      dispatch(createPost(postData));
+    }
   };
 
   return (
