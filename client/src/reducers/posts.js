@@ -10,3 +10,5 @@ const reducer = (posts = [], action) => {
       return posts;
   }
 };
+
+export default reducer;
